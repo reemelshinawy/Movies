@@ -1,0 +1,53 @@
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">🎬 Movie App</div>
+  <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+</div>
+
+<!--  USER DASHBOARD -->
+<div class="dashboard container">
+  <h2 class="welcome-title">Welcome to MoviesLand!</h2>
+
+  <!--  Search Bar -->
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search movies</mat-label>
+    <input matInput [(ngModel)]="searchQuery" (input)="filterMovies()" />
+  </mat-form-field>
+
+  <!-- Movie Grid -->
+  <div class="movie-cards" *ngIf="filteredMovies.length > 0; else noResults">
+    <mat-card class="movie-card" *ngFor="let movie of paginatedMovies">
+      <img
+        mat-card-image
+        [src]="movie.poster !== 'N/A' ? movie.poster : 'assets/default-poster.jpg'"
+        alt="{{ movie.title }}"
+        (click)="openMovieDialog(movie)"
+      />
+      <div class="custom-title" (click)="openMovieDialog(movie)">
+        {{ movie.title }}
+      </div>
+      
+    </mat-card>
+  </div>
+
+  <!-- No Results -->
+  <ng-template #noResults>
+    <p class="empty">No movies found matching "{{ searchQuery }}"</p>
+  </ng-template>
+
+  <!--  Pagination -->
+  <div class="pagination-container" *ngIf="totalPages > 1">
+    <button
+      class="page-btn"
+      [class.active]="page === currentPage"
+      *ngFor="let page of [].constructor(totalPages); let i = index"
+      (click)="changePage(i + 1)">
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>
+
+<!-- Loading Spinner -->
+<div *ngIf="loading" class="text-center my-4">
+  <mat-spinner diameter="40"></mat-spinner>
+</div>

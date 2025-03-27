@@ -1,0 +1,67 @@
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="logo">🎬 Movie Admin Dashboard</div>
+  <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+</div>
+
+<!-- ADMIN DASHBOARD -->
+<div class="dashboard">
+  <h2 class="welcome-title">Welcome to MoviesLand!</h2>
+
+  <!-- Search Section -->
+  <mat-form-field appearance="outline" class="search-field">
+    <mat-label>Search movies</mat-label>
+    <input matInput [(ngModel)]="searchTitle" />
+  </mat-form-field>
+
+  <div class="text-center">
+    <button mat-raised-button color="primary" (click)="searchMovie()">Search</button>
+  </div>
+
+  <!-- OMDB Results -->
+<div class="movie-cards" *ngIf="searchResults.length > 0">
+  <mat-card class="movie-card" *ngFor="let movie of searchResults">
+    <img mat-card-image [src]="movie.Poster" alt="Poster" />
+    <div class="custom-title">{{ movie.Title }}</div>
+    <mat-card-subtitle>{{ movie.Year }}</mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-stroked-button color="accent"
+        [disabled]="movie.existsInDb"
+        (click)="addMovie(movie.imdbID)">
+        {{ movie.existsInDb ? 'Added' : 'Add' }}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+  
+
+  <!-- DB Movies -->
+  <h3 class="section-title">Movies Added In the Dashboard</h3>
+
+  <div class="movie-cards" *ngIf="paginatedMovies.length > 0; else noMovies">
+    <mat-card class="movie-card" *ngFor="let movie of paginatedMovies">
+      <img mat-card-image [src]="movie.poster" alt="{{ movie.title }}" />
+      <div class="custom-title">{{ movie.title }}</div>
+      <mat-card-subtitle>{{ movie.year }}</mat-card-subtitle>
+      <mat-card-actions>
+        <button mat-stroked-button color="warn" (click)="deleteMovie(movie.id)">Delete</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+
+  <ng-template #noMovies>
+    <p class="empty">No movies found in the database.</p>
+  </ng-template>
+
+  <!-- Pagination -->
+  <div class="pagination-container" *ngIf="totalPages > 1">
+    <button
+      class="page-btn"
+      [class.active]="page === currentPage"
+      *ngFor="let page of [].constructor(totalPages); let i = index"
+      (click)="changePage(i + 1)">
+      {{ i + 1 }}
+    </button>
+  </div>
+</div>

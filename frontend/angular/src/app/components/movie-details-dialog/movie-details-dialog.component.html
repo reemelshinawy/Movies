@@ -1,0 +1,58 @@
+<h2 mat-dialog-title class="dialog-title">{{ movie.title }}</h2>
+
+<mat-dialog-content class="dialog-content full-dialog">
+  <div class="dialog-body">
+    <!-- Poster & Rating Side -->
+    <div class="poster-rating-container">
+      <img
+        class="poster"
+        [src]="movie.poster !== 'N/A' ? movie.poster : 'assets/default-poster.jpg'"
+        alt="{{ movie.title }}"
+      />
+
+      <!-- Rating Input -->
+      <div class="rating-section">
+        <label>Rate this movie (0–10):</label>
+        <mat-form-field appearance="fill">
+          <input
+            matInput
+            type="number"
+            [(ngModel)]="rating"
+            min="0"
+            max="10"
+            placeholder="Your rating"
+          />
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="submitRating()">Submit Rating</button>
+      </div>
+    </div>
+
+    <!-- Movie Details -->
+    <div class="details">
+      <p><strong>Year:</strong> {{ movie.year }}</p>
+      <p><strong>Rated:</strong> {{ movie.rated }}</p>
+      <p><strong>Released:</strong> {{ movie.released }}</p>
+      <p><strong>Runtime:</strong> {{ movie.runtime }}</p>
+      <p><strong>Genre:</strong> {{ movie.genre }}</p>
+      <p><strong>Director:</strong> {{ movie.director }}</p>
+      <p><strong>Writer:</strong> {{ movie.writer }}</p>
+      <p><strong>Actors:</strong> {{ movie.actors }}</p>
+      <p><strong>Plot:</strong> {{ movie.plot }}</p>
+      <p><strong>Language:</strong> {{ movie.language }}</p>
+      <p><strong>Country:</strong> {{ movie.country }}</p>
+      <p><strong>Awards:</strong> {{ movie.awards }}</p>
+      <p><strong>Metascore:</strong> {{ movie.metascore }}</p>
+      <p><strong>IMDB Rating:</strong> {{ movie.imdbRating }}</p>
+      <p><strong>IMDB Votes:</strong> {{ movie.imdbVotes }}</p>
+      <p><strong>Box Office:</strong> {{ movie.boxOffice }}</p>
+      <p><strong>Website:</strong> {{ movie.website }}</p>
+      <p><strong>Type:</strong> {{ movie.type }}</p>
+      <p><strong>Your Rating:</strong> {{ movie.userRating ?? 'Not rated yet' }}</p>
+      <p><strong>Average Rating:</strong> {{ movie.averageRating !== undefined ? movie.averageRating.toFixed(1) : '0.0' }}</p>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="warn">Close</button>
+</mat-dialog-actions>
