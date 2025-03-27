@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular": {
+    "movie-dashboard": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/angular",
+            "outputPath": "dist/movie-dashboard",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -32,6 +32,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -69,10 +70,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "angular:build:production"
+              "buildTarget": "movie-dashboard:build:production"
             },
             "development": {
-              "buildTarget": "angular:build:development"
+              "buildTarget": "movie-dashboard:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,6 +97,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -105,6 +107,6 @@
     }
   },
   "cli": {
-    "analytics": "a6c034ed-b94b-4252-bda5-eedef4606cfc"
+    "analytics": "e836afb4-cf67-44bf-a428-0a1ce6fa8242"
   }
 }

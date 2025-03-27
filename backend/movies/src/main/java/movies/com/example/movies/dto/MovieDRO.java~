@@ -1,0 +1,4 @@
+package movies.com.example.movies.dto;
+
+public class MovieDRO {
+}
